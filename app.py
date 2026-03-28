@@ -21,7 +21,9 @@ def index():
 
 @app.route("/trace")
 def trace():
-    encoded_flag = session.get("encoded_flag", "none")
+    raw_flag = f"flag{{ghost_{secrets.token_hex(6)}}}"
+    encoded_flag = base64.b64encode(raw_flag.encode()).decode()
+
     return render_template("trace.html", token=encoded_flag)
 
 if __name__ == "__main__":
